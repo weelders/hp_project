@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static fr.weelders.hp_project.DAO.GetAllDAO.getPersonnageList;
 import static fr.weelders.hp_project.DAO.GetAllDAO.getTailleList;
 
 @SpringBootApplication
@@ -51,6 +52,12 @@ public class HpProjectApplication
         return GetIdDAO.getPersonnageById(idPerso);
     }
 
+    @GetMapping("/getAllPersonnage")
+    public ArrayList<Personnage> getAllPersonnage() throws SQLException
+    {
+        return GetAllDAO.getPersonnageList();
+    }
+
     @GetMapping("/generateBaguette")
     public String generateAllBaguette() throws SQLException
     {
@@ -63,5 +70,12 @@ public class HpProjectApplication
     {
         GenerateDAO.generateTaille(min,max);
         return getTailleList();
+    }
+
+    @GetMapping("/addRandomPerso")
+    public Personnage addRandomPerso(@RequestParam(required = true) Boolean is_pj, String nom_perso, String prenom_perso, String img_perso, byte age_perso, Boolean etat_perso, String desc_perso) throws SQLException
+    {
+        GenerateDAO.generatePerso(is_pj,nom_perso,prenom_perso,img_perso,age_perso,etat_perso,desc_perso);
+        return getPersonnageById(getPersonnageList().size());
     }
 }
