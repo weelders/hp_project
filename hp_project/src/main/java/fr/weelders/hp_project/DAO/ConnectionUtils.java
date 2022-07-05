@@ -1,4 +1,6 @@
-package fr.weelders.hp_project;
+package fr.weelders.hp_project.DAO;
+
+import fr.weelders.hp_project.Const;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

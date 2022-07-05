@@ -1,12 +1,17 @@
-package fr.weelders.hp_project;
+package fr.weelders.hp_project.DAO;
 
 import fr.weelders.hp_project.Bean.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DbUtils
+import static fr.weelders.hp_project.DAO.GetIdDAO.*;
+
+public class GetAllDAO
 {
+    //////////////////////////////////////////////////////////////////////////////////
+    //GET DATA
+    //////////////////////////////////////////////////////////////////////////////////
     public static ArrayList<Maison> getMaisonList() throws SQLException
     {
         String query = "SELECT * FROM maison";
@@ -173,143 +178,26 @@ public class DbUtils
         return results;
     }
 
-
-    //GET BY ID
-
-    public static Rarete getRareteById(int idRarete) throws SQLException
+    public static ArrayList<Taille> getTailleList() throws SQLException
     {
-        String query = "SELECT * FROM rarete WHERE id_rarete = " + idRarete;
+        String query = "SELECT * FROM taille";
+        ArrayList<Taille> results = new ArrayList<Taille>();
 
         try (Connection conn = ConnectionUtils.getConnection())
         {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(query);
-            if(rs.next())
+            while (rs.next())
             {
-                return new Rarete(rs.getInt("id_rarete"), rs.getString("nom_rarete"));
+                results.add(new Taille(
+                        rs.getInt("id_taille"),
+                        rs.getInt("mesure_taille")
+                ));
             }
         } catch (ClassNotFoundException e)
         {
             throw new RuntimeException(e);
         }
-        return null;
-    }
-
-    public static Flexibilite getFlexibiliteById(int idFlexibilite) throws SQLException
-    {
-        String query = "SELECT * FROM flexibilite WHERE id_flexibilite = " + idFlexibilite;
-
-        try (Connection conn = ConnectionUtils.getConnection())
-        {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            if(rs.next())
-            {
-                return new Flexibilite(rs.getInt("id_flexibilite"), rs.getString("type_flexibilite"));
-            }
-        } catch (ClassNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public static Coeur getCoeurById(int idCoeur) throws SQLException
-    {
-        String query = "SELECT * FROM coeur WHERE id_coeur = " + idCoeur;
-
-        try (Connection conn = ConnectionUtils.getConnection())
-        {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            if(rs.next())
-            {
-                return new Coeur(rs.getInt("id_coeur"), rs.getString("nom_coeur"), getRareteById(rs.getInt("id_rarete_coeur")));
-            }
-        } catch (ClassNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public static Bois getBoisById(int idBois) throws SQLException
-    {
-        String query = "SELECT * FROM bois WHERE id_bois = " + idBois;
-
-        try (Connection conn = ConnectionUtils.getConnection())
-        {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            if(rs.next())
-            {
-                return new Bois(rs.getInt("id_bois"), rs.getString("nom_bois"));
-            }
-        } catch (ClassNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public static Epaisseur getEpaisseurById(int idEpaisseur) throws SQLException
-    {
-        String query = "SELECT * FROM epaisseur WHERE id_epaisseur = " + idEpaisseur;
-
-        try (Connection conn = ConnectionUtils.getConnection())
-        {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-
-            if(rs.next())
-            {
-                return new Epaisseur(rs.getInt("id_epaisseur"), rs.getString("nom_epaisseur"));
-            }
-        } catch (ClassNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public static TailleBaguette getTailleBaguetteById(int idTailleBaguette) throws SQLException
-    {
-        String query = "SELECT * FROM taille_baguette WHERE id_taille_baguette = " + idTailleBaguette;
-
-        try (Connection conn = ConnectionUtils.getConnection())
-        {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            if(rs.next())
-            {
-                return new TailleBaguette(rs.getInt("id_taille_baguette"), rs.getString("nom_taille_baguette"));
-            }
-        } catch (ClassNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-
-    //ADD
-
-    public static void addNewBaguette(Baguette baguette) throws SQLException
-    {
-        String query = "INSERT INTO baguette (id_flexibilite_baguette,id_coeur_baguette,id_bois_baguette,id_epaisseur_baguette,id_taille_baguette) VALUES(?,?,?,?,?);";
-
-        try (Connection conn = ConnectionUtils.getConnection())
-        {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1,baguette.getFlexibilite().getId_flexibilite());
-            ps.setInt(2,baguette.getCoeur().getId_coeur());
-            ps.setInt(3,baguette.getBois().getId_bois());
-            ps.setInt(4,baguette.getEpaisseur().getId_epaisseur());
-            ps.setInt(5,baguette.getTaille_baguette().getId_taille_baguette());
-            ps.execute();
-        } catch (ClassNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
+        return results;
     }
 }
