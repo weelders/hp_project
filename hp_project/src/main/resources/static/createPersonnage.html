@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create personnage</title>
+    </head>
+    <body>
+        <form method="get" action="/addRandomPerso">
+            <h1>Create new Random Character</h1>
+            <div>
+                <label for="nom_perso">Last name: </label>
+                <input type="text" name="nom_perso" id="nom_perso" placeholder="Enter last name" required>
+            </div>
+            <div>
+                <label for="prenom_perso">First name: </label>
+                <input type="text" name="prenom_perso" id="prenom_perso" placeholder="Enter first name" required>
+            </div>
+            <div>
+                <label for="age_perso">Age : </label>
+                <input type="number" name="age_perso" id="age_perso" placeholder="Enter age" required>
+            </div>
+            <div>
+                <label for="is_pj">Character is PJ ? : </label>
+                <select name="is_pj" id="is_pj">
+                    <option value="0" selected>NPC</option>
+                    <option value="1">PC</option>
+                </select>
+            </div>
+            <div>
+                <label for="etat_perso">Character is alive ? : </label>
+                <select id="etat_perso" name="etat_perso">
+                    <option value="1" selected>Alive</option>
+                    <option value="0">Dead</option>
+                </select>
+            </div>
+            <div>
+                <label for="img_perso">Avatar URL : </label>
+                <input type="text" name="img_perso" id="img_perso" placeholder="Enter URL avatar">
+            </div>
+            <div>
+                <label for="desc_perso">Description : </label>
+                <textarea name="desc_perso" id="desc_perso" placeholder="Enter age"></textarea>
+            </div>
+            <input type="submit" value="Send">
+        </form>
+    </body>
+</html>
