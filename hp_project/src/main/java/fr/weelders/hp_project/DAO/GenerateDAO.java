@@ -67,6 +67,17 @@ public class GenerateDAO
         ArrayList<Couleur_cheveux> listCouleurCheveux = getCouleurCheveuxList();
         ArrayList<Couleur_yeux> listCouleurYeux = getCouleurYeuxList();
 
+        Classe terminatingClasse = switch (age_perso)
+                {
+                    case 11 -> listClasse.get(0);
+                    case 12 -> listClasse.get(1);
+                    case 13 -> listClasse.get(2);
+                    case 15 -> listClasse.get(4);
+                    case 16 -> listClasse.get(5);
+                    case 17 -> listClasse.get(6);
+                    default -> listClasse.get(new Random().nextInt(listClasse.size()));
+                };
+
         Personnage newPersonnage = new Personnage(0,is_pj,nom_perso,prenom_perso,img_perso,age_perso,etat_perso,desc_perso,
                 listNiveau_soc.get(new Random().nextInt(listNiveau_soc.size())),
                 listNationnalite.get(new Random().nextInt(listNationnalite.size())),
@@ -81,7 +92,7 @@ public class GenerateDAO
                 listCheveux.get(new Random().nextInt(listCheveux.size())),
                 listRegard.get(new Random().nextInt(listRegard.size())),
                 listVisage.get(new Random().nextInt(listVisage.size())),
-                listClasse.get(new Random().nextInt(listClasse.size())),
+                terminatingClasse,
                 listTaille.get(new Random().nextInt(listTaille.size())),
                 listSexe.get(new Random().nextInt(listSexe.size())),
                 listMaison.get(new Random().nextInt(listMaison.size())),
