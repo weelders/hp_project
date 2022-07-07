@@ -7,7 +7,6 @@ import fr.weelders.hp_project.Bean.Taille;
 import fr.weelders.hp_project.DAO.GetAllDAO;
 import fr.weelders.hp_project.DAO.GenerateDAO;
 import fr.weelders.hp_project.DAO.GetIdDAO;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -56,15 +55,17 @@ public class HpProjectApplication
     {
         Utils.consoleLog("/getPersonnageById","idPerso= "+idPerso);
         Personnage perso = Objects.requireNonNull(GetIdDAO.getPersonnageById(idPerso));
-        model.addAttribute(perso);
+        model.addAttribute("personnage",perso);
         return "personnage";
     }
 
     @GetMapping("/getAllPersonnage")
-    public ArrayList<Personnage> getAllPersonnage() throws SQLException
+    public String getAllPersonnage(Model model) throws SQLException
     {
         Utils.consoleLog("/getAllPersonnage");
-        return GetAllDAO.getPersonnageList();
+        ArrayList<Personnage> personnages = GetAllDAO.getPersonnageList();
+        model.addAttribute("personnages",personnages);
+        return "all_personnage";
     }
 
     @GetMapping("/generateBaguette")
