@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create personnage</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous" defer></script>
+    </head>
+    <body>
+        <div th:replace="/fragment/header_fragment.html"></div>
+        <div class="container d-flex justify-content-center">
+            <form method="get" action="/addRandomPerso">
+                <h1 class="mb-2">Create new Random Character</h1>
+                <div class="m-1">
+                    <label for="nom_perso">Last name: </label>
+                    <input type="text" name="nom_perso" id="nom_perso" placeholder="Enter last name" required>
+                </div>
+                <div class="m-1">
+                    <label for="prenom_perso">First name: </label>
+                    <input type="text" name="prenom_perso" id="prenom_perso" placeholder="Enter first name" required>
+                </div>
+                <div class="m-1">
+                    <label for="age_perso">Age : </label>
+                    <input type="number" name="age_perso" id="age_perso" placeholder="Enter age" required>
+                </div>
+                <div class="m-1">
+                    <label for="is_pj">Character is PJ ? : </label>
+                    <select name="is_pj" id="is_pj">
+                        <option value="0" selected>NPC</option>
+                        <option value="1">PC</option>
+                    </select>
+                </div>
+                <div class="m-1">
+                    <label for="etat_perso">Character is alive ? : </label>
+                    <select id="etat_perso" name="etat_perso">
+                        <option value="1" selected>Alive</option>
+                        <option value="0">Dead</option>
+                    </select>
+                </div>
+                <div class="m-1">
+                    <label for="img_perso">Avatar URL : </label>
+                    <input type="text" name="img_perso" id="img_perso" placeholder="Enter URL avatar">
+                </div>
+                <div class="m-1">
+                    <label for="desc_perso">Description : </label>
+                    <textarea name="desc_perso" id="desc_perso" placeholder="Enter age"></textarea>
+                </div>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </body>
+</html>

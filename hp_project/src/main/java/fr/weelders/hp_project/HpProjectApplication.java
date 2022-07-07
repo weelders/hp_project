@@ -36,20 +36,6 @@ public class HpProjectApplication
         return "Hello world";
     }
 
-    @GetMapping("/getAllMaison")
-    public ArrayList<Maison> getAllMaison() throws SQLException
-    {
-        Utils.consoleLog("/getAllMaison");
-        return GetAllDAO.getMaisonList();
-    }
-
-    @GetMapping("/getAllBaguette")
-    public ArrayList<Baguette> getAllBaguette() throws SQLException
-    {
-        Utils.consoleLog("/getAllBaguette");
-        return GetAllDAO.getBaguetteList();
-    }
-
     @GetMapping("/getPersonnageById")
     public String getPersonnageById(Model model, @RequestParam(required = true) int idPerso) throws SQLException
     {
@@ -91,5 +77,12 @@ public class HpProjectApplication
         GenerateDAO.generatePerso(is_pj,nom_perso,prenom_perso,img_perso,age_perso,etat_perso,desc_perso);
         model.addAttribute(Objects.requireNonNull(GetIdDAO.getPersonnageById(getPersonnageList().size())));
         return "personnage";
+    }
+
+    @GetMapping("/createPersonnage")
+    public String createPersonnage(Model model) throws SQLException
+    {
+        Utils.consoleLog("/createPersonnage");
+        return "createPersonnage";
     }
 }
