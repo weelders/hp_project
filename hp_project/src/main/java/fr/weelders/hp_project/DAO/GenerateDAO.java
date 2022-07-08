@@ -8,7 +8,6 @@ import java.util.Random;
 
 import static fr.weelders.hp_project.DAO.AddDAO.*;
 import static fr.weelders.hp_project.DAO.GetAllDAO.*;
-import static fr.weelders.hp_project.DAO.GetIdDAO.*;
 
 public class GenerateDAO
 {
@@ -72,6 +71,7 @@ public class GenerateDAO
                     case 11 -> listClasse.get(0);
                     case 12 -> listClasse.get(1);
                     case 13 -> listClasse.get(2);
+                    case 14 -> listClasse.get(3);
                     case 15 -> listClasse.get(4);
                     case 16 -> listClasse.get(5);
                     case 17 -> listClasse.get(6);
