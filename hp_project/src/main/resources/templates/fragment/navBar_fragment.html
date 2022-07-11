@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark navbar-expand-lg" th:style="'background: '+ ${T(fr.weelders.hp_project.Color).PRIMARY}">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <img th:src="@{/img/logoHP.png}" alt="HP logo" width="50"/>
+      <img th:src="@{/img/logoHP_low.png}" alt="HP logo" width="50"/>
       HP Project</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,16 +9,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/" id="index">Home</a>
+          <a class="nav-link" href="/" id="index">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/getPersonnageById?idPerso=1" id="getPersonnageById">Get One Character</a>
+          <a class="nav-link" href="/getPersonnageById?idPerso=1" id="getPersonnageById">Afficher un personnage</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/getAllPersonnage" id="getAllPersonnage">Get All Characters</a>
+          <a class="nav-link" href="/getAllPersonnage" id="getAllPersonnage">Afficher tous les personnages</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/createPersonnage" id="createPersonnage">Add Random Character</a>
+          <a class="nav-link" href="/createPersonnage" id="createPersonnage">Ajouter un personnage</a>
         </li>
       </ul>
     </div>
