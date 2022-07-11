@@ -2,10 +2,12 @@ package fr.weelders.hp_project;
 
 import fr.weelders.hp_project.Bean.Taille;
 import fr.weelders.hp_project.DAO.GenerateDAO;
+import fr.weelders.hp_project.DAO.MiscDAO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

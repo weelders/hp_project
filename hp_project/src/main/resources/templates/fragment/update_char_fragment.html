@@ -1,0 +1,190 @@
+<form method="post" th:fragment="personnage" class="container" action="/update">
+    <div class="row text-center">
+        <label>Nom:
+            <input type="text" th:value="${personnage.getNom_perso()}" id="nom_perso" name="nom_perso">
+        </label>
+        <label>Prenom:
+            <input type="text" th:value="${personnage.getPrenom_perso()}" id="prenom_perso" name="prenom_perso">
+        </label>
+    </div>
+    <div class="row m-3 p-1">
+        <div class="col card mx-1 p-0">
+            <div class="card-header fw-bold" width="100%">Avatar</div>
+            <div class="card-body align-self-center">
+                <img class="img-thumbnail" th:src="${personnage.getImg_perso() != null} ? ${personnage.getImg_perso()} : '/img/cross_low.png'" width="130" alt="avatar">
+                <label>URL Image:
+                    <input type="text" th:value="${personnage.getImg_perso()}" id="img_perso" name="img_perso">
+                </label>
+            </div>
+        </div>
+        <div class="col card mx-1 p-0">
+            <div class="card-header fw-bold">Info</div>
+            <div class="card-body d-flex flex-column justify-content-around">
+                <label>En vie ?
+                    <select id="etat_perso" name="etat_perso">
+                        <option value="1" selected>En vie</option>
+                        <option value="0">Mort</option>
+                    </select>
+                </label>
+                <label>Est un joueur ?
+                    <select name="is_pj" id="is_pj">
+                        <option value="0" selected>Non</option>
+                        <option value="1">Oui</option>
+                    </select>
+                </label>
+                <label for="desc_perso">Description:</label>
+                <textarea name="desc_perso" id="desc_perso" style="height: 100px" th:text="${personnage.getDesc_perso()}"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row m-3 p-1">
+        <div class="col card mx-1 p-0">
+            <div class="card-header fw-bold">Détails</div>
+            <div class="card-body d-flex flex-column justify-content-around">
+                <label>Age:
+                    <input type="number" th:value="${personnage.getAge_perso()}" id="age_perso" name="age_perso">
+                </label>
+                <label>Maison:
+                    <select id="id_maison_perso" name="id_maison_perso">
+                        <option th:each="element : ${maison}" th:value="${element.getId_maison()}" th:text="${element.getNom_maison()}" th:selected="${element.getId_maison() == personnage.getMaison_perso().getId_maison()}"></option>
+                    </select>
+                </label>
+                <label>Classe:
+                    <select id="id_classe_perso" name="id_classe_perso">
+                        <option th:each="element : ${classe}" th:value="${element.getId_classe()}" th:text="${element.getNbr_classe()}" th:selected="${element.getId_classe() == personnage.getClasse_perso().getId_classe()}"></option>
+                    </select>
+                </label>
+                <label>Niveau social:
+                    <select id="id_niveau_soc_perso" name="id_niveau_soc_perso">
+                        <option th:each="element : ${niveau}" th:value="${element.getId_niveau_soc()}" th:text="${element.getNom_niveau_soc()}" th:selected="${element.getId_niveau_soc() == personnage.getNiveau_soc_perso().getId_niveau_soc()}"></option>
+                    </select>
+                </label>
+                <label>Sang:
+                    <select id="id_sang_perso" name="id_sang_perso">
+                        <option th:each="element : ${sang}" th:value="${element.getId_sang()}" th:text="${element.getNom_sang()}" th:selected="${element.getId_sang() == personnage.getSang_perso().getId_sang()}"></option>
+                    </select>
+                </label>
+                <label>Nationnalité:
+                    <select id="id_nationnalite_perso" name="id_nationnalite_perso">
+                        <option th:each="element : ${nationnalite}" th:value="${element.getId_nationnalite()}" th:text="${element.getNom_nationnalite()}" th:selected="${element.getId_nationnalite() == personnage.getNationnalite_perso().getId_nationnalite()}"></option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="col mx-1 p-0">
+            <div class="row">
+                <div class="col card ms-2 me-1 p-0">
+                    <div class="card-header fw-bold">Caractéristiques</div>
+                    <div class="card-body">
+                        WIP
+                    </div>
+                </div>
+                <div class="col card mx-1 p-0">
+                    <div class="card-header fw-bold">Baguette</div>
+                    <div class="card-body d-flex flex-column justify-content-around">
+                        <label>Bois:
+                            <span th:text="${personnage.getBaguette_perso().getBois().getNom_bois()}"></span>
+                        </label>
+                        <label>Coeur:
+                            <span th:text="${personnage.getBaguette_perso().getCoeur().getNom_coeur()}"></span>
+                        </label>
+                        <label>Rareté du coeur:
+                            <span th:text="${personnage.getBaguette_perso().getCoeur().getRarete().getNom_rarete()}"></span>
+                        </label>
+                        <label>Taille:
+                            <span th:text="${personnage.getBaguette_perso().getTaille_baguette().getNom_taille_baguette()}"></span>
+                        </label>
+                        <label>Epaisseur:
+                            <span th:text="${personnage.getBaguette_perso().getEpaisseur().getNom_epaisseur()}"></span>
+                        </label>
+                        <label>Flexibilité:
+                            <span th:text="${personnage.getBaguette_perso().getFlexibilite().getType_flexibilite()}"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row card m-3 p-1">
+        <div class="card-header fw-bold">Détails physiques</div>
+        <div class="card-body d-flex">
+            <div class="col d-flex flex-column justify-content-around">
+                <label>Taille:
+                    <select id="id_taille_perso" name="id_taille_perso">
+                        <option th:each="element : ${taille}" th:value="${element.getId_taille()}" th:text="${element.getMesure_taille()}" th:selected="${element.getId_taille() == personnage.getTaille_perso().getId_taille()}"></option>
+                    </select>
+                </label>
+                <label>Corpulence:
+                    <select id="id_corpulence_perso" name="id_corpulence_perso">
+                        <option th:each="element : ${corpulence}" th:value="${element.getId_corpulence()}" th:text="${element.getType_corpulence()}" th:selected="${element.getId_corpulence() == personnage.getCorpulence_perso().getId_corpulence()}"></option>
+                    </select>
+                </label>
+                <label>Bouche:
+                    <select id="id_bouche_perso" name="id_bouche_perso">
+                        <option th:each="element : ${bouche}" th:value="${element.getId_bouche()}" th:text="${element.getType_bouche()}" th:selected="${element.getId_bouche() == personnage.getBouche_perso().getId_bouche()}"></option>
+                    </select>
+                </label>
+                <label>Nez:
+                    <select id="id_nez_perso" name="id_nez_perso">
+                        <option th:each="element : ${nez}" th:value="${element.getId_nez()}" th:text="${element.getType_nez()}" th:selected="${element.getId_nez() == personnage.getNez_perso().getId_nez()}"></option>
+                    </select>
+                </label>
+                <label>Yeux:
+                    <select id="id_yeux_perso" name="id_yeux_perso">
+                        <option th:each="element : ${yeux}" th:value="${element.getId_yeux()}" th:text="${element.getForme_yeux()}" th:selected="${element.getId_yeux() == personnage.getYeux_perso().getId_yeux()}"></option>
+                    </select>
+                </label>
+                <label>Couleur des yeux:
+                    <select id="id_couleur_yeux_perso" name="id_couleur_yeux_perso">
+                        <option th:each="element : ${couleur_yeux}" th:value="${element.getId_couleur_yeux()}" th:text="${element.getNom_couleur_yeux()}" th:selected="${element.getId_couleur_yeux() == personnage.getCouleur_yeux_perso().getId_couleur_yeux()}"></option>
+                    </select>
+                </label>
+                <label>Attitude:
+                    <select id="id_attitude_perso" name="id_attitude_perso">
+                        <option th:each="element : ${attitude}" th:value="${element.getId_attitude()}" th:text="${element.getType_attitude()}" th:selected="${element.getId_attitude() == personnage.getAttitude_perso().getId_attitude()}"></option>
+                    </select>
+                </label>
+            </div>
+            <div class="col d-flex flex-column justify-content-around">
+                <label>Genre:
+                    <select id="id_sexe_perso" name="id_sexe_perso">
+                        <option th:each="element : ${sexe}" th:value="${element.getId_sexe()}" th:text="${element.getType_sexe()}" th:selected="${element.getId_sexe() == personnage.getSexe_perso().getId_sexe()}"></option>
+                    </select>
+                </label>
+                <label>Visage:
+                    <select id="id_visage_perso" name="id_visage_perso">
+                        <option th:each="element : ${visage}" th:value="${element.getId_visage()}" th:text="${element.getForme_visage()}" th:selected="${element.getId_visage() == personnage.getVisage_perso().getId_visage()}"></option>
+                    </select>
+                </label>
+                <label>Cheveux:
+                    <select id="id_cheveux_perso" name="id_cheveux_perso">
+                        <option th:each="element : ${cheveux}" th:value="${element.getId_cheveux()}" th:text="${element.getCoupe_cheveux()}" th:selected="${element.getId_cheveux() == personnage.getCheveux_perso().getId_cheveux()}"></option>
+                    </select>
+                </label>
+                <label>Couleur des Cheveux:
+                    <select id="id_couleur_cheveux_perso" name="id_couleur_cheveux_perso">
+                        <option th:each="element : ${couleur_cheveux}" th:value="${element.getId_couleur_cheveux()}" th:text="${element.getNom_couleur_cheveux()}" th:selected="${element.getId_couleur_cheveux() == personnage.getCouleur_cheveux_perso().getId_couleur_cheveux()}"></option>
+                    </select>
+                </label>
+                <label>Voix:
+                    <select id="id_voix_perso" name="id_voix_perso">
+                        <option th:each="element : ${voix}" th:value="${element.getId_voix()}" th:text="${element.getType_voix()}" th:selected="${element.getId_voix() == personnage.getVoix_perso().getId_voix()}"></option>
+                    </select>
+                </label>
+                <label>Façon de parler:
+                    <select id="id_parler_perso" name="id_parler_perso">
+                        <option th:each="element : ${parler}" th:value="${element.getId_parler()}" th:text="${element.getFacon_parler()}" th:selected="${element.getId_parler() == personnage.getParler_perso().getId_parler()}"></option>
+                    </select>
+                </label>
+                <label>Façon de regarder:
+                    <select id="id_regard_perso" name="id_regard_perso">
+                        <option th:each="element : ${regard}" th:value="${element.getId_regard()}" th:text="${element.getType_regard()}" th:selected="${element.getId_regard() == personnage.getRegard_perso().getId_regard()}"></option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <input type="submit" value="Mettre à jour" class="btn btn-warning col-3 mx-auto mb-3">
+    </div>
+</form>

@@ -2,14 +2,12 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Personnages</title>
+        <title>Mise à jour personnage</title>
         <div th:replace="/fragment/head_fragment.html"></div>
         <link rel="stylesheet" th:href="@{/css/char.css}">
     </head>
     <body>
         <div th:replace="/fragment/header_fragment.html"></div>
-        <th:block th:each="personnage : ${personnages}">
-            <div th:insert="~{/fragment/min_char_fragment.html :: personnage}"></div>
-        </th:block>
+        <div th:replace="/fragment/update_char_fragment.html"></div>
     </body>
 </html>

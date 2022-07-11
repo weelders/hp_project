@@ -4,6 +4,7 @@ import fr.weelders.hp_project.Bean.Personnage;
 import fr.weelders.hp_project.DAO.GetAllDAO;
 import fr.weelders.hp_project.DAO.GenerateDAO;
 import fr.weelders.hp_project.DAO.GetIdDAO;
+import fr.weelders.hp_project.DAO.MiscDAO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,48 @@ public class HpProjectApplication
         Personnage perso = Objects.requireNonNull(GetIdDAO.getPersonnageById(idPerso));
         model.addAttribute("personnage",perso);
         return "personnage";
+    }
+
+    @GetMapping("/updatePersonnageById")
+    public String updatePersonnageById(Model model, @RequestParam(required = true) int idPerso) throws SQLException
+    {
+        Utils.consoleLog("/updatePersonnageById","idPerso= "+idPerso);
+        Personnage perso = Objects.requireNonNull(GetIdDAO.getPersonnageById(idPerso));
+        model.addAttribute("personnage",perso);
+        model.addAttribute("maison",GetAllDAO.getMaisonList());
+        model.addAttribute("classe", GetAllDAO.getClasseList());
+        model.addAttribute("niveau", GetAllDAO.getNiveauSocList());
+        model.addAttribute("sang", GetAllDAO.getSangList());
+        model.addAttribute("nationnalite",GetAllDAO.getNationnaliteList());
+        model.addAttribute("taille", GetAllDAO.getTailleList());
+        model.addAttribute("corpulence", GetAllDAO.getCorpulenceList());
+        model.addAttribute("bouche", GetAllDAO.getBoucheList());
+        model.addAttribute("nez", GetAllDAO.getNezList());
+        model.addAttribute("yeux", GetAllDAO.getYeuxList());
+        model.addAttribute("couleur_yeux", GetAllDAO.getCouleurYeuxList());
+        model.addAttribute("attitude", GetAllDAO.getAttitudeList());
+        model.addAttribute("sexe", GetAllDAO.getSexeList());
+        model.addAttribute("visage", GetAllDAO.getVisageList());
+        model.addAttribute("cheveux", GetAllDAO.getCheveuxList());
+        model.addAttribute("couleur_cheveux", GetAllDAO.getCouleurCheveuxList());
+        model.addAttribute("voix", GetAllDAO.getVoixList());
+        model.addAttribute("parler", GetAllDAO.getParlerList());
+        model.addAttribute("regard", GetAllDAO.getRegardList());
+        return "updatePersonnage";
+    }
+
+    @GetMapping("/getPersonnageByName")
+    public String getPersonnageById(Model model, @RequestParam(required = true) String name) throws SQLException
+    {
+        Utils.consoleLog("/getPersonnageByName","name= "+ name);
+        ArrayList<Personnage> personnages = MiscDAO.getPersonnageByName(name);
+        model.addAttribute("personnages",personnages);
+        if (personnages.size() != 0){
+            return "allPersonnage";
+        }
+        else{
+            return "index";
+        }
     }
 
     @GetMapping("/getAllPersonnage")

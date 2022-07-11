@@ -1,78 +1,46 @@
 <div th:fragment="personnage" class="container">
-  <div class="row text-center">
-    <h1 th:text="${personnage.getNom_perso() + ' ' + personnage.getPrenom_perso()}"></h1>
-  </div>
-  <div class="row m-3 p-1">
-    <div class="col card mx-1 p-0">
-      <div class="card-header" width="100%">Avatar</div>
-      <div class="card-body align-self-center">
-        <img th:src="${personnage.getImg_perso()}" width="120" alt="avatar">
-      </div>
-    </div>
-    <div class="col card mx-1 p-0">
-      <div class="card-header">Info</div>
-      <div class="card-body">
-        <p th:text="|Is alive ? ${personnage.getEtat_perso()}|"></p>
-        <p th:text="|Is PC ? ${personnage.getIs_pj()}|"></p>
-        <p th:text="${'Description: '+personnage.getDesc_perso()}"></p>
-      </div>
-    </div>
-  </div>
-  <div class="row m-3 p-1">
-    <div class="col card mx-1 p-0">
-      <div class="card-header">Details</div>
-      <div class="card-body">
-        <p th:text="|Age: ${personnage.getAge_perso()}|"></p>
-        <p th:text="|House: ${personnage.getMaison_perso().getNom_maison()}|"></p>
-        <p th:text="|Grade: ${personnage.getClasse_perso().getNbr_classe()}|"></p>
-        <p th:text="|Social level: ${personnage.getNiveau_soc_perso().getNom_niveau_soc()}|"></p>
-        <p th:text="|Blood: ${personnage.getSang_perso().getNom_sang()}|"></p>
-        <p th:text="|Nationnality: ${personnage.getNationnalite_perso().getNom_nationnalite()}|"></p>
-      </div>
-    </div>
-    <div class="col mx-1 p-0">
-      <div class="row">
-        <div class="col card ms-2 me-1 p-0">
-          <div class="card-header">Characteristics</div>
-          <div class="card-body">
-            WIP
-          </div>
-        </div>
+    <div class="row m-3 p-1">
         <div class="col card mx-1 p-0">
-          <div class="card-header">Wand</div>
-          <div class="card-body">
-            <p th:text="|Wood: ${personnage.getBaguette_perso().getBois().getNom_bois()}|"></p>
-            <p th:text="|Heart: ${personnage.getBaguette_perso().getCoeur().getNom_coeur()}|"></p>
-            <p th:text="|Heart Rarity: ${personnage.getBaguette_perso().getCoeur().getRarete().getNom_rarete()}|"></p>
-            <p th:text="|Size: ${personnage.getBaguette_perso().getTaille_baguette().getNom_taille_baguette()}|"></p>
-            <p th:text="|Thickness: ${personnage.getBaguette_perso().getEpaisseur().getNom_epaisseur()}|"></p>
-            <p th:text="|Flexibility: ${personnage.getBaguette_perso().getFlexibilite().getType_flexibilite()}|"></p>
-          </div>
+            <div class="card-header fw-bold"><a th:href="|/getPersonnageById?idPerso=${personnage.getId_perso()}|" th:text="${personnage.getNom_perso() + ' ' + personnage.getPrenom_perso()}"></a></div>
+            <div class="card-body d-flex row">
+                <div class="col align-self-center">
+                    <img class="img-thumbnail" th:src="${personnage.getImg_perso() != null} ? ${personnage.getImg_perso()} : '/img/cross_low.png'" width="130" alt="avatar">
+                </div>
+                <div class="d-flex col flex-column justify-content-around">
+                    <label>Age:
+                        <span th:text="${personnage.getAge_perso()}"></span>
+                    </label>
+                    <label>Maison:
+                        <span th:text="${personnage.getMaison_perso().getNom_maison()}"></span>
+                    </label>
+                    <label>Classe:
+                        <span th:text="${personnage.getClasse_perso().getNbr_classe()}"></span>
+                    </label>
+                    <label>Niveau social:
+                        <span th:text="${personnage.getNiveau_soc_perso().getNom_niveau_soc()}"></span>
+                    </label>
+                    <label>En vie ?
+                        <span th:text="${personnage.getEtat_perso()} ? 'Oui' : 'Non'"></span>
+                    </label>
+                    <label>Est un joueur ?
+                        <span th:text="${personnage.getIs_pj()} ? 'Oui' : 'Non'"></span>
+                    </label>
+                </div>
+                <div class="d-flex col flex-column justify-content-around">
+                    <label>Sang:
+                        <span th:text="${personnage.getSang_perso().getNom_sang()}"></span>
+                    </label>
+                    <label>Nationnalité:
+                        <span th:text="${personnage.getNationnalite_perso().getNom_nationnalite()}"></span>
+                    </label>
+                    <label>Genre:
+                        <span th:text="${personnage.getSexe_perso().getType_sexe()}"></span>
+                    </label>
+                    <label>Description:
+                        <span th:text="${personnage.getDesc_perso()}"></span>
+                    </label>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="row card m-3 p-1">
-    <div class="card-header">Body Details</div>
-    <div class="card-body d-flex">
-      <div class="col">
-        <p th:text="|Size: ${personnage.getTaille_perso().getMesure_taille()}cm|"></p>
-        <p th:text="|Corpulence: ${personnage.getCorpulence_perso().getType_corpulence()}|"></p>
-        <p th:text="|Mouth: ${personnage.getBouche_perso().getType_bouche()}|"></p>
-        <p th:text="|Nose: ${personnage.getNez_perso().getType_nez()}|"></p>
-        <p th:text="|Eyes: ${personnage.getYeux_perso().getForme_yeux()}|"></p>
-        <p th:text="|Eye color: ${personnage.getCouleur_yeux_perso().getNom_couleur_yeux()}|"></p>
-        <p th:text="|Posture: ${personnage.getAttitude_perso().getType_attitude()}|"></p>
-      </div>
-      <div class="col">
-        <p th:text="|Gender: ${personnage.getSexe_perso().getType_sexe()}|"></p>
-        <p th:text="|Face: ${personnage.getVisage_perso().getForme_visage()}|"></p>
-        <p th:text="|Hair: ${personnage.getCheveux_perso().getCoupe_cheveux()}|"></p>
-        <p th:text="|Hair color: ${personnage.getCouleur_cheveux_perso().getNom_couleur_cheveux()}|"></p>
-        <p th:text="|Voice: ${personnage.getVoix_perso().getType_voix()}|"></p>
-        <p th:text="|Speak: ${personnage.getParler_perso().getFacon_parler()}|"></p>
-        <p th:text="|Way to watch: ${personnage.getRegard_perso().getType_regard()}|"></p>
-      </div>
-    </div>
-  </div>
 </div>

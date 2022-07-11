@@ -1,6 +1,7 @@
 <div th:fragment="personnage" class="container">
-    <div class="row text-center">
+    <div class="d-flex text-center flex-row justify-content-center">
         <h1 th:text="${personnage.getNom_perso() + ' ' + personnage.getPrenom_perso()}"></h1>
+       <a class="material-icons md-18 align-self-center mx-3 text-warning" th:href="|/updatePersonnageById?idPerso=${personnage.getId_perso()}|">edit</a>
     </div>
     <div class="row m-3 p-1">
         <div class="col card mx-1 p-0">
@@ -104,7 +105,7 @@
                 <label>Couleur des yeux:
                     <span th:text="${personnage.getCouleur_yeux_perso().getNom_couleur_yeux()}"></span>
                 </label>
-                <label>Posture:
+                <label>Attitude:
                     <span th:text="${personnage.getAttitude_perso().getType_attitude()}"></span>
                 </label>
             </div>
