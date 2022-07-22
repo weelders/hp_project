@@ -1,16 +1,14 @@
 package fr.weelders.hp_project;
 
 import fr.weelders.hp_project.Bean.Personnage;
-import fr.weelders.hp_project.DAO.GetAllDAO;
-import fr.weelders.hp_project.DAO.GenerateDAO;
-import fr.weelders.hp_project.DAO.GetIdDAO;
-import fr.weelders.hp_project.DAO.MiscDAO;
+import fr.weelders.hp_project.DAO.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,6 +33,47 @@ public class HpProjectApplication
         Utils.consoleLog("/getPersonnageById","idPerso= "+idPerso);
         Personnage perso = Objects.requireNonNull(GetIdDAO.getPersonnageById(idPerso));
         model.addAttribute("personnage",perso);
+        return "personnage";
+    }
+
+    @PostMapping(
+            path = "/update",
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public String update(Model model, @RequestParam MultiValueMap<String, String> params) throws SQLException{
+        Utils.consoleLog("/update",params.getFirst("id_maison_perso"));
+        Personnage updatedPerso = new Personnage(
+                Boolean.parseBoolean(params.getFirst("is_pj")),
+                params.getFirst("nom_perso"),
+                params.getFirst("prenom_perso"),
+                params.getFirst("img_perso"),
+                Byte.parseByte(params.getFirst("age_perso")),
+                Boolean.parseBoolean(params.getFirst("etat_perso")),
+                params.getFirst("desc_perso"),
+                GetIdDAO.getNiveauSocById(Integer.parseInt(params.getFirst("id_niveau_soc_perso"))),
+                GetIdDAO.getNationnaliteById(Integer.parseInt(params.getFirst("id_nationnalite_perso"))),
+                GetIdDAO.getCorpulenceById(Integer.parseInt(params.getFirst("id_corpulence_perso"))),
+                //TODO BAGUETTE TEMPORARY AT 1
+                GetIdDAO.getBaguetteById(1),
+                GetIdDAO.getBoucheById(Integer.parseInt(params.getFirst("id_bouche_perso"))),
+                GetIdDAO.getNezById(Integer.parseInt(params.getFirst("id_nez_perso"))),
+                GetIdDAO.getVoixById(Integer.parseInt(params.getFirst("id_voix_perso"))),
+                GetIdDAO.getParlerById(Integer.parseInt(params.getFirst("id_parler_perso"))),
+                GetIdDAO.getAttitudeById(Integer.parseInt(params.getFirst("id_attitude_perso"))),
+                GetIdDAO.getYeuxById(Integer.parseInt(params.getFirst("id_yeux_perso"))),
+                GetIdDAO.getCheveuxById(Integer.parseInt(params.getFirst("id_cheveux_perso"))),
+                GetIdDAO.getRegardById(Integer.parseInt(params.getFirst("id_regard_perso"))),
+                GetIdDAO.getVisageById(Integer.parseInt(params.getFirst("id_visage_perso"))),
+                GetIdDAO.getClasseById(Integer.parseInt(params.getFirst("id_classe_perso"))),
+                GetIdDAO.getTailleById(Integer.parseInt(params.getFirst("id_taille_perso"))),
+                GetIdDAO.getSexeById(Integer.parseInt(params.getFirst("id_sexe_perso"))),
+                GetIdDAO.getMaisonById(Integer.parseInt(params.getFirst("id_maison_perso"))),
+                GetIdDAO.getSangById(Integer.parseInt(params.getFirst("id_sang_perso"))),
+                GetIdDAO.getCouleurCheveuxById(Integer.parseInt(params.getFirst("id_couleur_cheveux_perso"))),
+                GetIdDAO.getCouleurYeuxById(Integer.parseInt(params.getFirst("id_couleur_yeux_perso")))
+        );
+
+        UpdateDAO.updatePersonnage(updatedPerso, Integer.parseInt(params.getFirst("id_perso")));
+        model.addAttribute("personnage", GetIdDAO.getPersonnageById(Integer.parseInt(params.getFirst("id_perso"))));
         return "personnage";
     }
 
@@ -94,8 +133,8 @@ public class HpProjectApplication
     {
         Utils.consoleLog("/addRandomPerso","is_pj= "+is_pj+" nom_perso= "+nom_perso+" prenom_perso= "+prenom_perso+" img_perso= "+img_perso+" age_perso= "+age_perso+" etat_perso= "+etat_perso+" desc_perso= "+desc_perso);
         GenerateDAO.generatePerso(is_pj,nom_perso,prenom_perso,img_perso.isBlank() ? null: img_perso,age_perso,etat_perso,desc_perso);
-        model.addAttribute(Objects.requireNonNull(GetIdDAO.getPersonnageById(getPersonnageList().size())));
-        return "personnage";
+        model.addAttribute("personnages",GetAllDAO.getPersonnageList());
+        return "allPersonnage";
     }
 
     @GetMapping("/createPersonnage")

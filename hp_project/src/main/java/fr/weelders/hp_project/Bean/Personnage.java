@@ -1,5 +1,8 @@
 package fr.weelders.hp_project.Bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+
 public class Personnage
 {
     private int id_perso = 0;
@@ -34,6 +37,37 @@ public class Personnage
     public Personnage(int id_perso, Boolean is_pj, String nom_perso, String prenom_perso, String img_perso, byte age_perso, Boolean etat_perso, String desc_perso, Niveau_soc niveau_soc_perso, Nationnalite nationnalite_perso, Corpulence corpulence_perso, Baguette baguette_perso, Bouche bouche_perso, Nez nez_perso, Voix voix_perso, Parler parler_perso, Attitude attitude_perso, Yeux yeux_perso, Cheveux cheveux_perso, Regard regard_perso, Visage visage_perso, Classe classe_perso, Taille taille_perso, Sexe sexe_perso, Maison maison_perso, Sang sang_perso, Couleur_cheveux couleur_cheveux_perso, Couleur_yeux couleur_yeux_perso)
     {
         this.id_perso = id_perso;
+        this.is_pj = is_pj;
+        this.nom_perso = nom_perso;
+        this.prenom_perso = prenom_perso;
+        this.img_perso = img_perso;
+        this.age_perso = age_perso;
+        this.etat_perso = etat_perso;
+        this.desc_perso = desc_perso;
+        this.niveau_soc_perso = niveau_soc_perso;
+        this.nationnalite_perso = nationnalite_perso;
+        this.corpulence_perso = corpulence_perso;
+        this.baguette_perso = baguette_perso;
+        this.bouche_perso = bouche_perso;
+        this.nez_perso = nez_perso;
+        this.voix_perso = voix_perso;
+        this.parler_perso = parler_perso;
+        this.attitude_perso = attitude_perso;
+        this.yeux_perso = yeux_perso;
+        this.cheveux_perso = cheveux_perso;
+        this.regard_perso = regard_perso;
+        this.visage_perso = visage_perso;
+        this.classe_perso = classe_perso;
+        this.taille_perso = taille_perso;
+        this.sexe_perso = sexe_perso;
+        this.maison_perso = maison_perso;
+        this.sang_perso = sang_perso;
+        this.couleur_cheveux_perso = couleur_cheveux_perso;
+        this.couleur_yeux_perso = couleur_yeux_perso;
+    }
+
+    public Personnage(Boolean is_pj, String nom_perso, String prenom_perso, String img_perso, byte age_perso, Boolean etat_perso, String desc_perso, Niveau_soc niveau_soc_perso, Nationnalite nationnalite_perso, Corpulence corpulence_perso, Baguette baguette_perso, Bouche bouche_perso, Nez nez_perso, Voix voix_perso, Parler parler_perso, Attitude attitude_perso, Yeux yeux_perso, Cheveux cheveux_perso, Regard regard_perso, Visage visage_perso, Classe classe_perso, Taille taille_perso, Sexe sexe_perso, Maison maison_perso, Sang sang_perso, Couleur_cheveux couleur_cheveux_perso, Couleur_yeux couleur_yeux_perso)
+    {
         this.is_pj = is_pj;
         this.nom_perso = nom_perso;
         this.prenom_perso = prenom_perso;

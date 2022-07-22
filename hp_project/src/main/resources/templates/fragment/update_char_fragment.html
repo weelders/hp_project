@@ -1,4 +1,5 @@
-<form method="post" th:fragment="personnage" class="container" action="/update">
+<form method="POST" th:fragment="personnage" class="container" action="/update">
+    <input type="hidden" name="id_perso" th:value="${personnage.getId_perso}">
     <div class="row text-center">
         <label>Nom:
             <input type="text" th:value="${personnage.getNom_perso()}" id="nom_perso" name="nom_perso">
