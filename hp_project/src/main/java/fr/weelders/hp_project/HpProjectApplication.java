@@ -40,7 +40,7 @@ public class HpProjectApplication
             path = "/update",
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public String update(Model model, @RequestParam MultiValueMap<String, String> params) throws SQLException{
-        Utils.consoleLog("/update",params.getFirst("id_maison_perso"));
+        Utils.consoleLog("/update",params.getFirst("nom_perso")+ " " +params.getFirst("prenom_perso"));
         Personnage updatedPerso = new Personnage(
                 Boolean.parseBoolean(params.getFirst("is_pj")),
                 params.getFirst("nom_perso"),
@@ -105,17 +105,28 @@ public class HpProjectApplication
         return "updatePersonnage";
     }
 
+    @GetMapping("/deletePerso")
+    public String deletePerso(Model model, @RequestParam(required = true) int idPerso) throws SQLException
+    {
+        Utils.consoleLog("/deletePerso","idPerso= "+idPerso);
+        MiscDAO.deletePersonnageById(idPerso);
+        ArrayList<Personnage> personnages = GetAllDAO.getPersonnageList();
+        model.addAttribute("personnages",personnages);
+        return "allPersonnage";
+    }
+
     @GetMapping("/getPersonnageByName")
     public String getPersonnageById(Model model, @RequestParam(required = true) String name) throws SQLException
     {
         Utils.consoleLog("/getPersonnageByName","name= "+ name);
         ArrayList<Personnage> personnages = MiscDAO.getPersonnageByName(name);
-        model.addAttribute("personnages",personnages);
         if (personnages.size() != 0){
+            model.addAttribute("personnages",personnages);
             return "allPersonnage";
         }
         else{
-            return "index";
+            model.addAttribute("personnages",GetAllDAO.getPersonnageList());
+            return "allPersonnage";
         }
     }
 

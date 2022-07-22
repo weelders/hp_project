@@ -58,4 +58,19 @@ public class MiscDAO
         }
         return results;
     }
+
+    public static void deletePersonnageById(int id) throws SQLException
+    {
+        String query = "DELETE FROM personnage WHERE id_perso = ?;";
+
+        try (Connection conn = ConnectionUtils.getConnection())
+        {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.execute();
+        } catch (ClassNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }
